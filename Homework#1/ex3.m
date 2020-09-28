@@ -1,14 +1,14 @@
 n = 256;    % length of inputs 
-x = [0:n-1]-n/2; 
+x = [0:n-1]-n/2
 k = [-n/2:1:n/2-1]*2*pi/n; % sampling points
-f = zeros(1,n);
 
 display('delta_x has to be two to the power of an interger')
 delta_x = input('please input delta_x'); % change delta_x to see the results
 
 %---------- loop begins ------------
 
-for j = 0:n/delta_x-1             
+f = zeros(1,n);
+for j = 0:n/delta_x/2-1             
     
     f(n/2+1+j*delta_x) = 1;
     f(n/2+1-j*delta_x) = 1; 
@@ -24,11 +24,11 @@ for j = 0:n/delta_x-1
 end  
 
 function r = range(x)
-    d = 0.1*(max(x)-min(x))
-    if(d==0),
-        d=1
+    m = 0.1*(max(x)-min(x))
+    if(m==0),
+        m=1
     end
-    r = [min(x)-d max(x)+d]
+    r = [min(x)-m max(x)+m]
     
 end
 
