@@ -1,0 +1,277 @@
+\documentclass[11pt,a4paper,BCOR12mm, headexclude, footexclude, twoside, openright]{scrartcl} 
+\usepackage[scaled]{helvet}
+\usepackage[british]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{ifthen}
+\usepackage{amsmath,amsfonts,amsthm}
+\usepackage{sfmath}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{sectsty}
+\usepackage{graphicx}
+
+%\KOMAoptions{optionenliste}
+%\KOMAoptions{Option}{Werteliste}
+
+
+\addtokomafont{caption}{\small}
+%\setkomafont{descriptionlabel}{\normalfont
+%	\bfseries}
+\setkomafont{captionlabel}{\normalfont
+	\bfseries}
+\let\oldtabular\tabular
+\renewcommand{\tabular}{\sffamily\oldtabular}
+\KOMAoptions{abstract=true}
+%\setkomafont{footnote}{\sffamily}
+%\KOMAoptions{twoside=true}
+%\KOMAoptions{headsepline=true}
+%\KOMAoptions{footsepline=true}
+\renewcommand\familydefault{\sfdefault}
+\renewcommand{\arraystretch}{1.1}
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+\setlength{\textheight}{230mm}
+\allsectionsfont{ \normalfont\scshape}
+\let\tmp\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tmp
+\reversemarginpar
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt}
+
+
+\begin{document}
+
+
+%\sffamily
+
+\fancypagestyle{plain}
+{%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0.5pt}
+  \fancyhf{}%
+ \fancyhead[R]{\emph{\footnotesize \today}}
+  \fancyfoot[C]{\emph{\footnotesize Boqi Chen, bochen@student.ethz.ch}\\ \emph{\footnotesize Xin Wu, xinwuxin@student.ethz.ch}}%
+}
+
+
+
+\titlehead
+{
+	ETH Zürich\\%
+	D-ITET\\%
+	Biomedical Engineering\hfill
+    Master Studies%
+}
+
+\subject{\vspace{-1ex} \horrule{2pt}\\[0.15cm] {\textsc{\texttt{Biomedical Imaging}}}}
+
+\title{Homework \#2 - Ultrasound 1\\[0.5cm]}
+
+\author{\bfseries{Xin Wu \\ \textbf{Boqi Chen\\}}\vspace{-2ex}}
+\date{\begin{tabular}{cc}
+  \textsc{Date:}& \textsc{\emph{\today}}\\
+  \textsc{Due :}& \textsc{\emph{5th October  2020}}\vspace{3ex}
+\end{tabular}}
+
+\maketitle
+
+%--------------------------------------------
+\newpage
+
+\section{Exercise 1} 
+
+Pressure reflection coefficient:
+\begin{equation}
+     r = \frac{Z_2 - Z_1}{Z_2 + Z_1}
+\end{equation}
+
+Pressure transmission coefficient:
+\begin{equation}
+     t = \frac{2Z_2}{Z_2 + Z_1}
+\end{equation}
+
+where $Z_1$, $Z_2$ is the wave impedance of the first and second material each separately. 
+
+Let $p_i$ , $p_r$ and $p_t$ be the pressure amplitude of the incident beam, reflected beam and the transmitted wave each separately, we obtain:
+
+\begin{equation}
+     p_r = rp_i=\frac{Z_2 - Z_1}{Z_2 + Z_1}p_i
+\end{equation}
+
+\begin{equation}
+     p_t = tp_i=\frac{2Z_2}{Z_2 + Z_1}p_i
+\end{equation}
+
+The intensity of the beam is given by:
+
+\begin{equation}
+     I =\frac{pu_z}{2}
+\end{equation}
+where $u_z$ is the particle velocity given by:
+\begin{equation}
+     u_z =\frac{p}{Z}
+\end{equation}
+
+So we can easily derive:
+\begin{equation}
+     I =\frac{p^2}{2Z}
+\end{equation}
+
+Let $I_i$, $I_r$, $I_t$ be the intensity of the incident beam, reflected beam and the transmitted wave each separately, we can easily derive:
+
+\begin{equation}
+     I_i =\frac{p_i^2}{2Z_1}
+\end{equation}
+
+\begin{equation}
+     I_r =\frac{p_r^2}{2Z_1}=\frac{(Z_2 - Z_1)^2}{(Z_2 + Z_1)^2}\frac{p_i^2}{2Z_1}
+\end{equation}
+
+\begin{equation}
+     I_t =\frac{p_t^2}{2Z_2}=\frac{4Z_2^2}{(Z_2 + Z_1)^2}\frac{p_i^2}{2Z_2}
+\end{equation}
+
+The total beam intensity at the boundary is:
+\begin{equation}
+     I_{total} = I_r + I_t =\frac{(Z_2 - Z_1)^2}{(Z_2 + Z_1)^2}\frac{p_i^2}{2Z_1}+\frac{4Z_2^2}{(Z_2 + Z_1)^2}\frac{p_i^2}{2Z_2}
+\end{equation}
+
+\begin{equation}
+      =\frac{p_i^2}{2}\frac{Z_2(Z_1^2+Z_2^2-2Z_1Z_2)+4Z_2^2Z_1}{Z_1Z_2(Z_1+Z_2)^2}
+\end{equation}
+
+\begin{equation}
+      =\frac{p_i^2}{2}\frac{Z_2Z_1^2+Z_2^3-2Z_1Z_2^2+4Z_2^2Z_1}{Z_1Z_2(Z_1+Z_2)^2}
+\end{equation}
+
+\begin{equation}
+      =\frac{p_i^2}{2}\frac{Z_1^2+Z_2^2+2Z_1Z_2}{Z_1(Z_1+Z_2)^2}
+\end{equation}
+
+\begin{equation}
+      =\frac{p_i^2}{2}\frac{(Z_1+Z_2)^2}{Z_1(Z_1+Z_2)^2}
+\end{equation}
+
+\begin{equation}
+      =\frac{p_i^2}{2Z_1}
+\end{equation}
+
+Thus, we can prove:
+
+\begin{equation}
+      I_i = I_r + I_t
+\end{equation}
+
+i.e. transmission and reflection at the boundary conserve total beam intensity.
+
+\newpage
+
+\section{Exercise 2}
+\subsection{NFB} 
+
+\begin{equation}
+      \lambda_{fat} = \frac{c_{fat}}{f}=\frac{1476}{3\times10^6}=4.92\times10^{-4}m
+\end{equation}
+
+\begin{equation}
+      NFB \approx \frac{r^2}{\lambda_{fat}} = \frac{1.5^2\times10^{-6}}{4.92\times10^{-4}}=4.57\times10^{-3}m
+\end{equation}
+
+\subsection{On-axis Pressure and Intensity Levels Entering the Muscle Layer} 
+
+Pressure at NFB:
+\begin{equation}
+    P_{fat} = \sqrt{2Z_{fat}I_{NFB}}=  \sqrt{2\times1.36\times100\times10^6}=1.65\times10^4Pa
+\end{equation}
+
+Considering the attenuation in fat:
+
+\begin{equation}
+    attenuation_{fat} = 0.5*3*(1-0.457)=0.81dB
+\end{equation}
+We can easily derive:
+\begin{equation}
+    \frac{p_{fat}}{p^\prime_{fat}} = 10^\frac{0.81}{20}
+\end{equation}
+Pressure at boundary at the fat side:
+\begin{equation}
+    p^\prime_{fat}=1.50\times10^4Pa
+\end{equation}
+
+Pressure at boundary at the muscle side:
+\begin{equation}
+    p_{muscle} = t_{fat\rightarrow muscle}p^\prime_{fat}=\frac{2Z_{muscle}}{Z_{muscle} + Z_{fat}}p_{fat}=1.65\times10^4Pa
+\end{equation}
+
+Intensity level at boundary at the muscle side:
+\begin{equation}
+    I_{muscle} = \frac{p_{muscle}^2}{2Z_{muscle}} = \frac{1.65^2\times10^8}{2\times1.66\times10^6}=82W/m^2
+\end{equation}
+
+\subsection{Peak Particle Velocity} 
+\begin{equation}
+    u_z = \frac{p_{muscle}}{Z_{muscle}} = \frac{1.65\times10^4Pa}{1.66\times10^6}=9.94\times10^{-3}m/s
+\end{equation}
+
+\subsection{Depth in the Muscle when the Sound Intensity Dropped to 1 mW/cm2 } 
+
+When the sound intensity drops to 1 mW/cm2, the pressure drops to:
+\begin{equation}
+    P^\prime_{muscle} = \sqrt{2Z_{muscle}I}=  \sqrt{2\times1.66\times10^6\times10}=5.76\times10^3Pa
+\end{equation}
+Suppose the sound intensity drop to 1 mW/cm2 at depth $z_0+\Delta z$, where $z_0$ is the depth of the fat, we can derive the following equation:
+\begin{equation}
+    \frac{p_{muscle}}{p^\prime_{muscle}} =\frac{1.65\times10^4Pa}{5.76\times10^3Pa}= 10^\frac{2\times3\times(1+\Delta z)}{20}
+\end{equation}
+Solving the equation and we get:
+\begin{equation}
+    \Delta z= 1.52cm
+\end{equation}
+So:
+\begin{equation}
+    Z = Z_0 + \Delta z= 2.52cm
+\end{equation}
+
+\subsection{Lateral Resolution} 
+
+\begin{equation}
+    \lambda_{fat}=\frac{c_{fat}}{f}=0.49\times10^{-3}
+\end{equation}
+
+\begin{equation}
+    \theta_{fat}= arcsin(\frac{0.61\lambda_{fat}}{r}) = 11.49^\circ
+\end{equation}
+
+\begin{equation}
+    \lambda_{muscle}=\frac{c_{muscle}}{f}=0.52\times10^{-3}
+\end{equation}
+
+\begin{equation}
+    \theta_{muscle}= arcsin(\frac{0.61\lambda_{muscle}}{r}) = 12.33^\circ
+\end{equation}
+
+So we can obtain the lateral resolution:
+
+\begin{equation}
+    \Delta x = d + 2(x_{fat}-NFB)tan\theta_{fat}+ 2\Delta z tan\theta_{muscle}= 1.16\times10^{-2}cm
+\end{equation}
+
+\subsection{Axial Resolution in Fat and Muscle} 
+
+\begin{equation}
+    \Delta z_{fat} = \frac{p_dc_{fat}}{2} = 7.38\times10^{-4}m
+\end{equation}
+
+\begin{equation}
+     \Delta z_{muscle} = \frac{p_dc_{muscle}}{2} = 7.84\times10^{-4}m
+\end{equation}
+
+
+\end{document}
